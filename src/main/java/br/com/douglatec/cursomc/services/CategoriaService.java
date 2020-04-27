@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.douglatec.cursomc.domain.Categoria;
 import br.com.douglatec.cursomc.repositories.CategoriaRepository;
+import br.com.douglatec.cursomc.services.exceptions.ObjectNoFoundException;
 
 @Service
 public class CategoriaService {
@@ -19,7 +20,7 @@ public class CategoriaService {
 	
 	public Categoria find(Integer id) {
 		Optional<Categoria> obj = categoriaRepository.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(()->new ObjectNoFoundException("Objeto não encontrado! ID: "+id+", tipo: "+Categoria.class.getName()));
 	}
 
 }
