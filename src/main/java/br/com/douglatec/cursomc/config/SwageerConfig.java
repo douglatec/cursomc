@@ -28,7 +28,7 @@ public class SwageerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("br.com.douglatec.cursomc"))
-                .paths(regex("/api.*"))
+                .paths(regex("/categorias.*"))
                 .build()
                 .apiInfo(metaInfo());
     }
