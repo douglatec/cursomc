@@ -8,18 +8,25 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.douglatec.cursomc.domain.Categoria;
+import br.com.douglatec.cursomc.domain.Cidade;
+import br.com.douglatec.cursomc.domain.Estado;
 import br.com.douglatec.cursomc.domain.Produto;
 import br.com.douglatec.cursomc.repositories.CategoriaRepository;
+import br.com.douglatec.cursomc.repositories.CidadeRepository;
+import br.com.douglatec.cursomc.repositories.EstadoRepository;
 import br.com.douglatec.cursomc.repositories.ProdutoRepository;
 
 @SpringBootApplication
 public class CursomcApplication implements CommandLineRunner{
 	
 	@Autowired
-	CategoriaRepository categoriaRespository;
-	
+	CategoriaRepository categoriaRespository;	
 	@Autowired
 	ProdutoRepository produtoRepository;
+	@Autowired
+	EstadoRepository estadoRepository;
+	@Autowired
+	CidadeRepository cidadeRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -45,6 +52,20 @@ public class CursomcApplication implements CommandLineRunner{
 		
 		categoriaRespository.saveAll(Arrays.asList(cat1,cat2));
 		produtoRepository.saveAll(Arrays.asList(p1,p2,p3));
+		
+		Estado est1 = new Estado(null,"Minas Gerais");
+		Estado est2 = new Estado(null,"São Paulo");
+		
+		Cidade c1 = new Cidade(null, "Uberlandia",est2);
+		Cidade c2 = new Cidade(null, "São Paulo",est2);
+		Cidade c3 = new Cidade(null, "Campinas",est2);
+		
+		est1.getCidades().addAll(Arrays.asList(c1));
+		est2.getCidades().addAll(Arrays.asList(c2,c3));
+		
+		estadoRepository.saveAll(Arrays.asList(est1,est2));
+		cidadeRepository.saveAll(Arrays.asList(c1,c2,c3));
+		
 	}
 	
 	

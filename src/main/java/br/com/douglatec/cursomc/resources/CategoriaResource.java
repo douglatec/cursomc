@@ -33,3 +33,9 @@ public class CategoriaResource {
 	
 
 }
+
+
+/*
+ http://localhost:8080/swagger-ui.html#/ ----> Documentação da API
+ http://localhost:8080/h2-console/ -----> Banco de dados de teste H2
+*/
