@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.google.common.base.Predicate;
 
+import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
@@ -21,17 +22,14 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @EnableSwagger2
 public class SwageerConfig {
 	
-	//http://localhost:8080/swagger-ui.html
-	
+	//http://localhost:8080/swagger-ui.html	
+
 	@Bean
-    public Docket productApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("br.com.douglatec.cursomc.resources"))
-                .paths(regex("/cliente.*"))                
-                .build()
-                .apiInfo(metaInfo());
-    }
+	public Docket api() {
+		return new Docket(DocumentationType.SWAGGER_2).select()
+				.apis(RequestHandlerSelectors.basePackage("br.com.douglatec.cursomc.resources")).paths(PathSelectors.any())
+				.build().apiInfo(metaInfo());
+	}
 
   
 	private ApiInfo metaInfo() {
