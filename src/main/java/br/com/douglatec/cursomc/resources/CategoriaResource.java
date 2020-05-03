@@ -27,20 +27,29 @@ public class CategoriaResource {
 	@Autowired
 	private CategoriaService categoriaService;
 	
-	//@GetMapping()
+	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	@ApiOperation("Retorna as Categorias")
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<Categoria> find(@PathVariable Integer id) {
 		Categoria obj = categoriaService.find(id);
 		
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
+	@ApiOperation("Salva uma nova categoria")
 	public ResponseEntity<Void> insert(@RequestBody Categoria obj){
 		obj = categoriaService.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
+	}
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.PUT)
+	@ApiOperation("Atualiza a categoria")
+	public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id){
+		obj.setId(id);
+		obj = categoriaService.update(obj);
+		return ResponseEntity.noContent().build();
 	}
 
 }

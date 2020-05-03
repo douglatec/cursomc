@@ -25,7 +25,7 @@ public class PedidoResource {
 	//@GetMapping()
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	@ApiOperation("Retorna as Pedidos")
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<Pedido> find(@PathVariable Integer id) {
 		Pedido obj = pedidoService.find(id);
 		
 		return ResponseEntity.ok().body(obj);
